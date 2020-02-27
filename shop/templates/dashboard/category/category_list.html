@@ -1,0 +1,54 @@
+{% extends 't_base.html' %}
+{% load static %}
+{% block stylesheets %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static "admin-lte/dist/css/dataTables.bootstrap.min.css" %}">
+{% endblock %}
+{% block title %} Категории {% endblock %}
+
+
+
+{% block content %}
+<div class="row">
+<div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Категории</h3>
+
+              <div class="box-tools">
+                  <a><button class="btn  btn-success pull-right" target-link="{{ create_link }}" id="create-item" data-toggle="modal"   data-target="#modal-default" >Создать</button></a>
+              </div>
+
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding" id="table-content">
+             {% include 'dashboard/category/category_table_content.html' with categorys=categorys %}
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+</div>
+<div class="modal fade" id="modal-default"  style="display: none;">
+          <div class="modal-dialog" style="width:55%">
+            <div class="modal-content" id="detail-content">
+
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+{% endblock %}
+
+{% block javascript %}
+{{ block.super }}
+
+
+
+<script src="{% static "list.js" %}"></script>
+
+
+
+
+{% endblock %}

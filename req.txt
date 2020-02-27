@@ -1,0 +1,17 @@
+beautifulsoup4==4.8.1
+bs4==0.0.1
+certifi==2019.9.11
+chardet==3.0.4
+Django==2.2.6
+django-adminlte2==0.4.1
+django-widget-tweaks==1.4.5
+djangorestframework==3.10.3
+geographiclib==1.50
+geopy==1.20.0
+idna==2.8
+pytils==0.3
+pytz==2019.3
+requests==2.22.0
+soupsieve==1.9.5
+sqlparse==0.3.0
+urllib3==1.25.6

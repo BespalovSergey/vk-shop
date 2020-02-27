@@ -1,0 +1,63 @@
+{% extends 't_base.html' %}
+{% load widget_tweaks %}
+
+{% block title %} {{ user.accountmanager.shop.name }} {% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h3 class="box-title">{{ user.accountmanager.shop.name}}</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+               </div>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form action="{{ auto.get_aubsolute_url }}" method="post" class="form-horizontal">
+                <div class="box-body">
+                    {% for field in shop_form %}
+
+                    <div class="form-group">
+
+                        <p style="color:red">{{ field.errors }}</p>
+
+                        <div class="col-sm-2"> {{ field.label_tag }}</div>
+
+                        <div class="col-sm-4">
+                            {{ field|add_class:"form-control" }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% for field in bot_form %}
+
+                    <div class="form-group">
+
+                        <p style="color:red">{{ field.errors }}</p>
+
+                        <div class="col-sm-2"> {{ field.label_tag }}</div>
+
+                        <div class="col-sm-4">
+                            {{ field|add_class:"form-control" }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <!-- /.box-body -->
+                {% csrf_token %}
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-success">Сохранить</button>
+
+                </div>
+                <!-- /.box-footer -->
+            </form>
+        </div>
+    </div>
+</div>
+
+</form>
+
+
+{% endblock %}

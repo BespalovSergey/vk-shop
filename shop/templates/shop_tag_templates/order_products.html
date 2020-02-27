@@ -1,0 +1,7 @@
+<table order-id="{{ order_id }}">
+{% for product in products %}
+<tr>
+  <td><a href="#" class="p-item" pid="{{ product.id }}" data-toggle="modal"   data-target="#modal-default">{{ product.name }}</a><span> {{ product.count }} шт. на {{ product.total }} руб  </span></td><td> <button style="margin-left:5px" class="btn btn-danger btn-xs" id="dop-{{ product.id }}">X</button> </td>
+</tr>
+{% endfor %}
+</table>

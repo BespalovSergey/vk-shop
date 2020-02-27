@@ -1,0 +1,8 @@
+
+<tr>
+    <td><a href="#" class="item" id="{{ product.pk }}"  data-toggle="modal"   data-target="#modal-default">{{ product.name }}</a></td>
+    <td>{{ product.price }}</td>
+    <td>{{ product.category }}</td>
+    <td>{% if product.availabel %} Да {% else %} Нет {% endif %}</td>
+    <td>{{ product.shop }}</td>
+</tr>

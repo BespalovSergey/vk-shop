@@ -1,0 +1,5 @@
+<select class="form-control">
+    {% for item in context.items %}
+    <option value="{{ item.value }}" {% if item.selected %} selected {% endif %}>{{ item.name }}</option>
+    {% endfor %}
+</select>

@@ -1,0 +1,8 @@
+{% extends 'adminlte/login.html' %}
+
+{% block title %} Выход {% endblock%}
+{% block logo_text %} Такси Статист {% endblock %}
+{% block login_form %}
+<h3>Вы вышли из системы</h3>
+<p><a href="{% url 'login' %}">Войти</a></p>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'adminlte/login.html' %}
+
+{% block logo_text %}Бот Шоп{% endblock%}
+{% block login_form %}
+{% if register_done %}
+
+<h3>Добро пожалоать {{ new_user }}!</h3>
+<p>Ваш аккаунт успешно создан.
+<p>Вы можете <a href="{% url 'login' %}">войти</a> на сайт</p>
+
+    {% endif %}
+
+{% endblock %}

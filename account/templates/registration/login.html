@@ -1,0 +1,36 @@
+{% extends 'adminlte/login.html' %}
+
+{% block logo_text %}Бот Шоп{% endblock%}
+{% block login_form %}
+{% if register_done %}
+
+<h3>Добро пожалоать {{ new_user }}!</h3>
+<p>Ваш аккаунт успешно создан.
+    {% endif %}
+    <form action="" method="post">
+        {% csrf_token %}
+        {% if message %}
+<p class="login-box-msg" style="color: red;">{{ message }}</p>
+{% endif %}
+<div class="form-group has-feedback">
+    <input name="username" class="form-control" placeholder="Почта">
+    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+</div>
+<div class="form-group has-feedback">
+    <input type="password" name="password" class="form-control" placeholder="Пароль">
+    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+    <input type="hidden" name="next" value="{{ next }}">
+</div>
+
+<div class="row">
+    <div class="col-xs-8">
+        {% block login_form_links %}
+        {% endblock %}
+    </div>
+    <div class="col-xs-4">
+        <button type="submit" class="btn btn-primary btn-block btn-flat">Войти</button>
+    </div>
+</div>
+</form>
+<p><a href="{% url 'password_reset' %}">Забыли пароль?</a></p>
+{% endblock %}

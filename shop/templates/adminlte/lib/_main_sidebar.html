@@ -1,0 +1,30 @@
+{% extends 'adminlte/lib/_main_sidebar.html' %}
+{% block nav_heading %}ГЛАВНОЕ МЕНЮ{% endblock %}
+{% block user_panel %}{% endblock%}
+{% block nav_links %}
+ {% if user.is_authenticated %}
+    {% if menu %}
+     {% for item_m in menu %}
+      {% if item_m.type == 'list' %}
+         <li class="treeview menu-open" style="height: auto;">
+          <a href="#">
+            <i class="fa {{ item_m.icon }}"></i>
+            <span>{{ item_m.text }}</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu" style="display: none;">
+              {% for item in item_m.items %}
+            <li><a href="{% url item.link %}"><i class="fa {{ item.icon }}"></i> {{ item.text }}</a></li>
+              {% endfor %}
+          </ul>
+        </li>
+      {% else %}
+         <li><a href="{% url item_m.link %}"><i class="fa {{ item_m.icon }}"></i> <span>{{ item_m.text }}</span></a></li>
+
+     {% endif %}
+    {% endfor %}
+    {% endif %}
+ {% endif %}
+{% endblock nav_links %}

@@ -1,0 +1,119 @@
+{% extends 't_base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block stylesheets %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static "admin-lte/dist/css/dataTables.bootstrap.min.css" %}">
+{% endblock %}
+{% block title %} Заказы {% endblock %}
+
+
+
+{% block content %}
+<div class="row">
+        <div class="col-xs-12">
+          <!-- jQuery Knob -->
+          <div class="box box-solid">
+            <div class="box-header">
+                <h3 class="box-title">Фильтры</h3>
+                <div class="box-tools pull-right">
+                <button type="button" class="btn btn-default btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body" id="filters">
+              <div class="row">
+
+              <form action="{% url "shop:order_list" %}">
+                  {% csrf_token %}
+                  <div class="col-xs-6 col-md-2 text-left">
+                  <div class="form-group">
+                     <p style="color:red">{{ filters.filter_category.errors }}</p>
+                      {{ filters.filter_category.label_tag }}
+                      {{ filters.filter_category|add_class:"form-control" }}
+
+                   </div>
+                      </div>
+                  <div class="col-xs-6 col-md-2 text-left">
+                  <div class="form-group">
+                     <p style="color:red">{{ filters.filter_availabel.errors }}</p>
+                      {{ filters.filter_availabel.label_tag }}
+                      {{ filters.filter_availabel }}
+
+                   </div>
+                      </div>
+
+              </form>
+
+
+              </div>
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+<div class="row">
+<div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Заказы</h3>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-body table-responsive no-padding" id="table-content">
+                {% csrf_token %}
+                <table class="table table-hover" target-link="product_detail/">
+               <thead>
+                <tr>
+                    <th>Клиент </th>
+                    <th>Адрес</th>
+                    <th>Телефон</th>
+                    <th>Сумма</th>
+                    <th>Товары</th>
+                    <th>Статус заказа</th>
+               </thead>
+               <tbody>
+                </tr>
+
+                   {% for order in orders %}
+                    {% include 'dashboard/orders/order_row.html' with cart=cart %}
+                    {% endfor %}
+
+                  </tbody>
+
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+
+</div>
+<div class="modal fade" id="modal-default"  style="display: none;">
+          <div class="modal-dialog" style="width:55%">
+            <div class="modal-content" id="detail-content">
+
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+{% endblock %}
+
+{% block javascript %}
+{{ block.super }}
+
+
+
+<script src="{% static "list.js" %}"></script>
+<script src="{% static "ajax_pagination.js" %}"></script>
+<script src="{% static "orders.js" %}"></script>
+
+
+
+
+{% endblock %}

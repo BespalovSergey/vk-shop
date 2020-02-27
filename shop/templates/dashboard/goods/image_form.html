@@ -1,0 +1,28 @@
+{% load widget_tweaks %}
+<div  {% if image %}class="image-form" id="image-{{image.id}}"{% endif %}>
+<form method="post" action="add_product_image/{{product.id}}{% if image %}/{{image.id}}{% endif %}">
+                      {% csrf_token %}
+                      {% for field in form %}
+                      <div class="row">
+                          <div class="form-group">
+                             <p style="color:red">{{ field.errors }}</p>
+                             <div class="col-sm-9">{{ field.label_tag }}
+                                 {{ field|add_class:"form-control" }} </div>
+                          </div>
+                              <div class="col-sm-3">
+                                  <input type="submit" class="btn btn-success " value="Сохранить">
+                                  {% if image %}
+                                  <button type="button" class="btn btn-danger pull-right" link="remove_product_image/{{image.id}}">X</button>
+                                  {% endif %}
+                              </div>
+                      </div>
+
+                      {% endfor %}
+                  </form>
+                  {% if image.image_link and image.file_url != 'Not photo' %}
+                  <img class="img-responsive pad" src="{{image.file_url}}">
+                  {% elif not image %}
+                  {% else %}
+                  <p style="color:red">Изображение не доступно</p>
+                  {% endif %}
+    </div>

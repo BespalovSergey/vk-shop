@@ -1,0 +1,14 @@
+{% load shop_tags %}
+<tr>{% if cart.user %}
+    <td><a href="https://vk.com/{{ cart.user.domain }}" target="_blank" >{{ cart.user }}</a></td>
+    {% else %}
+    <td><a href="https://vk.com/{% if cart.vk_id|isdigits %}id{% endif %}{{ cart.vk_id }}" target="_blank" >{{ cart.vk_id }}</a></td>
+    {% endif %}
+    <td>{{ cart.items.count }}</td>
+    <td>{{ cart.cart_total }}</td>
+    <td>{% for item in cart.items.all %}
+        <a href="#" class="item" id="{{ item.product.pk }}" slug="{{ item.product.slug }}" data-toggle="modal"   data-target="#modal-default">{{ item.product.name }} </a>   {{ item.qty }} шт <br>
+        {% endfor %}
+    </td>
+    <td>{{ cart.shop }}</td>
+</tr>

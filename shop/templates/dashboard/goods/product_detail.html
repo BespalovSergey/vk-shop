@@ -1,0 +1,84 @@
+{% load widget_tweaks %}
+
+
+<div class="modal-header">
+    <button type="button" id="close-modal-default" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span></button>
+    <h3 class="box-title">Товар {% if product %} {{ product.name }} изменить {% else %} добавить {% endif %}</h3>
+
+</div>
+<div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Основные настройки</a></li>
+              <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Изображения</a></li>
+
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab_1">
+                  <form id="data_settings" action="{% if product %} {{ product.get_absolute_url }} {% else %}{% url "shop:create_product" %}{% endif %}" id="item-form" method="post" class="form-horizontal">
+                <div class="row">
+                    <div class="col-md-11">
+                   <div class="modal-body">
+
+                    {% for field in product_form %}
+
+                    <div class="form-group">
+                        <p style="color:red">{{ field.errors }}</p>
+                        <div class="col-sm-5">{{ field.label_tag }}</div>
+
+                        {% if field.field.widget.input_type == 'checkbox' %}
+                                        <div class="col-sm-7">{{ field}}</div>
+                        {% else %}
+                                        <div class="col-sm-7">{{ field|add_class:"form-control" }}</div>
+                        {% endif %}
+
+
+                    </div>
+                    {% endfor %}
+                    {% csrf_token %}
+                </div>
+
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success pull-left">Сохранить</button>
+                    {% if product %}
+                    <button type="button" class="btn btn-danger pull-left" data-toggle="modal" data-target="#modal-danger">
+                        Удалить
+                    </button>
+                    <div class="modal modal-danger " id="modal-danger">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span></button>
+                                    <h4 class="modal-title pull-left">Удалить {{ product.name }}</h4>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <a href="#">
+                                        <button type="button" class="btn btn-outline" data-dismiss="modal" id="delete-item" target-link="{{ product.get_delete_url }}" ">Удалить</button>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                    {% endif %}
+
+                </div>
+                </form>
+              </div>
+              <!-- /.tab-pane -->
+              <div class="tab-pane" id="tab_2">
+                <div id="image_settings">
+                    {% for form, image in images %}
+                    {% include 'dashboard/goods/image_form.html' %}
+                    {% endfor %}
+                </div>
+              </div>
+              <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+          </div>

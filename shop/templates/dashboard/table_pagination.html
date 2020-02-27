@@ -1,0 +1,16 @@
+<div class="box-footer clearfix">
+
+              <ul class="pagination pagination-sm no-margin pull-right">
+                            {% if page.has_previous %}
+                            <li><a href="?page={{ page.previous_page_number }}" ><<</a></li>
+                            {% endif %}
+                            {% for p in page_range %}
+                            <li class="paginate_button {% if page.number == p %} active {% endif %}"><a href="?page={{p}}" >{{p}}</a></li>
+                            {% endfor %}
+                            {% if page.has_next %}
+                            <li><a href="?page={{ page.next_page_number }}" >>></a></li>
+                            {% endif %}
+                        </ul>
+            </div>
+
+

@@ -1,0 +1,9 @@
+{% load shop_tags %}
+<tr>
+    <td><a href="https://vk.com/{{ order.user.domain }}" target="_blank" >{{ order.user }}</a></td>
+    <td>{{ order.adres|short_adres:"%&" }}</td>
+    <td>{{ order.phone }}</td>
+    <td id="total-{{ order.id }}">{{ order.total_summ }}</td>
+    <td order-id="{{ order.id }}">{% order_products  order %}</td>
+    <td>{% order_status order %}</td>
+</tr>
